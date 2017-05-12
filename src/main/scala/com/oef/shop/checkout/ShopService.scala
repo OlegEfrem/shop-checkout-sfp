@@ -7,6 +7,9 @@ trait ShopService {
   type Price = Double
 
   def checkout(fruits: Seq[Fruit]): Price
+
+  def checkoutWithOffer(fruits: Seq[Fruit]): Price
+
 }
 
 object ShopService {
@@ -20,4 +23,5 @@ private[checkout] class DefaultShopService(priceList: PriceList) extends ShopSer
     fruits.map(priceList.priceFor).sum
   }
 
+  override def checkoutWithOffer(fruits: Seq[Fruit]) = 0
 }
