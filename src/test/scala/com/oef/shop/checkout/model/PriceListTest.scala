@@ -16,5 +16,11 @@ class PriceListTest extends UnitTest {
       priceList.priceFor(Orange) shouldBe 0.25
     }
 
+    s"return an exception for an intem with no price defined" in {
+      a[PriceNotFoundException] shouldBe thrownBy {
+        priceList.priceFor(Grapes)
+      }
+    }
+
   }
 }
