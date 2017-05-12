@@ -1,6 +1,6 @@
 package com.oef.shop.checkout
 
-import com.oef.shop.checkout.model.Fruit
+import com.oef.shop.checkout.model.{ Fruit, PriceList }
 
 trait ShopService {
   type Fruit = Fruit.Value
@@ -11,7 +11,13 @@ trait ShopService {
 
 object ShopService {
 
-  def apply(): ShopService = new ShopService {
-    override def checkout(fruits: Seq[Fruit]) = ???
+  def apply(priceList: PriceList = PriceList): ShopService = new DefaultShopService(priceList)
+}
+
+private[checkout] class DefaultShopService(priceList: PriceList) extends ShopService {
+
+  override def checkout(fruits: Seq[Fruit]) = {
+    fruits.map(priceList.priceFor).sum
   }
+
 }
