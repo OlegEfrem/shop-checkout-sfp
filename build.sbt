@@ -1,11 +1,10 @@
-
 organization := "com.oef"
 
 name := "shop-checkout-simple"
 
 version := "1.0"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.10"
 
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
