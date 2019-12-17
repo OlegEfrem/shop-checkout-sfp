@@ -5,7 +5,7 @@ object Fruit extends Enumeration {
 }
 
 trait PriceList {
-  def priceFor(fruit: Fruit.Value): Double
+  def priceFor(fruit: Fruit): Price
 }
 
 object PriceList extends PriceList {
@@ -20,7 +20,7 @@ object PriceList extends PriceList {
 
   def apply(): PriceList = PriceList
 
-  def priceFor(fruit: Fruit.Value): Double = {
+  def priceFor(fruit: Fruit): Price = {
     prices.get(fruit) match {
       case Some(p) => p
       case None => throw PriceNotFoundException(s"price for $fruit not defined")
@@ -30,12 +30,12 @@ object PriceList extends PriceList {
 
 case class PriceNotFoundException(message: String) extends Exception(message)
 
-case class Offer(buy: Int, pay: Int) {
+case class Offer(buy: Count, pay: Count) {
   require(pay > 0 && buy > 0, s"pay: $pay & buy: $buy must be greater than zero.")
 }
 
 trait OfferList {
-  def offerFor(fruit: Fruit.Value): Option[Offer]
+  def offerFor(fruit: Fruit): Option[Offer]
 }
 
 object OfferList extends OfferList {
@@ -50,6 +50,6 @@ object OfferList extends OfferList {
 
   def apply(): OfferList = OfferList
 
-  override def offerFor(fruit: Fruit.Value): Option[Offer] =
+  override def offerFor(fruit: Fruit): Option[Offer] =
     offers.get(fruit)
 }

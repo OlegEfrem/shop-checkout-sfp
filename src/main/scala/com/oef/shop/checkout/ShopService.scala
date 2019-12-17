@@ -1,11 +1,9 @@
 package com.oef.shop.checkout
 
 import com.oef.shop.checkout.impl.DefaultShopService
-import com.oef.shop.checkout.model.{ Fruit, OfferList, PriceList }
+import com.oef.shop.checkout.model._
 
 trait ShopService {
-  type Fruit = Fruit.Value
-  type Price = Double
 
   def checkout(fruits: Seq[Fruit]): Price
 

@@ -1,6 +1,6 @@
 package com.oef.shop.checkout
 
-import com.oef.shop.checkout.model.Fruit
+import com.oef.shop.checkout.model._
 import com.oef.shop.checkout.model.Fruit._
 import org.scalatest.prop.TableDrivenPropertyChecks.forAll
 import org.scalatest.prop.Tables.Table
@@ -9,7 +9,7 @@ import scala.language.implicitConversions
 class ShopServiceTest extends UnitTest {
   private val service = ShopService()
 
-  private val testData = Table[Seq[Fruit.Value], Double, Double](
+  private val testData = Table[Seq[Fruit], Price, Price](
     ("Fruits", "Price No Offer", "Price On Offer"),
     (basket(appleNo = 2), 1.2, 0.6),
     (basket(orangeNo = 3), 0.75, 0.5),
@@ -18,7 +18,7 @@ class ShopServiceTest extends UnitTest {
     (basket(appleNo = 3, orangeNo = 4), 2.8, 1.95)
   )
 
-  private def basket(appleNo: Int = 0, orangeNo: Int = 0): Seq[Fruit.Value] = {
+  private def basket(appleNo: Int = 0, orangeNo: Int = 0): Seq[Fruit] = {
     val oranges = (1 to orangeNo).map(_ => Orange)
     val apples = (1 to appleNo).map(_ => Apple)
     apples ++ oranges

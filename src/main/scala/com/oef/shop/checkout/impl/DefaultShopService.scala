@@ -1,18 +1,17 @@
 package com.oef.shop.checkout.impl
 
 import com.oef.shop.checkout.ShopService
-import com.oef.shop.checkout.model.{ Offer, OfferList, PriceList }
+import com.oef.shop.checkout.model._
 
 private[checkout] class DefaultShopService(priceList: PriceList, offerList: OfferList) extends ShopService {
-  type Count = Int
 
   import com.oef.shop.checkout.util.NumOps._
 
-  override def checkoutWithOffer(fruits: Seq[Fruit]) = {
+  override def checkoutWithOffer(fruits: Seq[Fruit]): Price = {
     priceFor(fruits, includeOffers = true)
   }
 
-  override def checkout(fruits: Seq[Fruit]) = {
+  override def checkout(fruits: Seq[Fruit]): Price = {
     priceFor(fruits, includeOffers = false)
   }
 
@@ -33,7 +32,7 @@ private[checkout] class DefaultShopService(priceList: PriceList, offerList: Offe
     }
   }
 
-  private def priceWithOffer(count: Count, price: Price, o: Offer) = {
+  private def priceWithOffer(count: Count, price: Price, o: Offer): Price = {
     val onOfferPrice = count / o.buy * o.pay * price
     val noOfferPrice = count % o.buy * price
     onOfferPrice + noOfferPrice
